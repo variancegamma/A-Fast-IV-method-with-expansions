@@ -10,6 +10,9 @@ gcc -Ofast -march=native -mtune=native -ffp-contract=fast \
     -fno-signed-zeros -fno-rounding-math -fomit-frame-pointer \
     -o bench_iv_c_all_hh4.exe bench_iv_c_all_hh4.c -lm
 ```
+After GCC compilation, the executable bench_iv_c_all_hh4.exe is ready to be run standalone.
+
+
 ## Benchmark Results
 
 Timings report the best of 5 runs. The standard grid contains 328 base points repeated 5,000 times, giving 1,640,000 implied-volatility inversions.
@@ -38,3 +41,7 @@ This benchmark removes the Python/ctypes shared-library wrapper used in the Jäc
 |---|---:|---:|---:|---:|
 | Regime-split HH-4, standalone C | 1,640,000 | 117.2 | 118.8 | 7.333e-14 |
 
+The Jackel benchmark can be replicated using simple python script run.
+```bash
+python bench_jackel_vs_regime.py
+```
