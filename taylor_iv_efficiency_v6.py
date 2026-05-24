@@ -2,36 +2,12 @@
 """
 taylor_iv_efficiency.py  —  Final consolidated benchmark  (optimised build)
 
-Optimisations vs previous version
------------------------------------
-1. halley_iv(): math.exp(k) hoisted before the iteration loop.
-   With mean ~2.7 Halley steps this saves ~1.7 exp() calls per IV.
-
-2. seed_logit_clean(): duplicate Horner evaluation of eps eliminated.
-   eps_kk and eps (inside vp1) were the same polynomial — now computed once.
-
-3. normcdf_erf() / normpdf(): INV_SQRT2 and INV_SQRT2PI promoted to
-   module-level constants so numba does not rebuild them on every call.
-
-4. cache=True added to all @njit decorators — avoids recompilation on
-   subsequent runs and modestly reduces warm-up overhead.
-
-5. All seed functions: exp(|k|) for ITM options now computed as 1/exp(k)
-   (division) instead of a second math.exp() call — saves one transcendental
-   call per ITM option in every seed that needs exp(|k|).
-
-6. halley_iv(): iteration cap reduced from 8 to 6 — sufficient for all
-   regime-split seeds, allows tighter loop scheduling by the compiler.
-
 Seed architecture (unchanged)
 ------------------------------
   ATM  (|k| < 0.01) : Taylor4 ATM inverse
   Mild-OTM  0.01 ≤ |k| ≤ 0.50 : logit/P1 algebraic seed (no exp calls)
   Deep OTM  |k| > 0.50 : ratio-corrected quadratic seed
-  Polish : Householder-4 everywhere (quartic convergence, cap 6)
-           Previously Halley for ATM + deep-OTM, HH4 only for mild-OTM.
-           Benchmark showed HH4 saves ~0.44 iters in ALL regimes → +7.6%
-           speedup vs Halley-all, +5.6% vs HH4-mild-OTM-only.
+  Final RootSolver  Polish : Householder-4 everywhere 
 
 Usage
 -----
@@ -502,19 +478,6 @@ def polish_nosr_logit_hh4(k, c, v):
         return householder4_iv(k, c, v)
     return halley_iv(k, c, v)
 
-
-# ── HH4-all: Householder-4 in every regime ────────────────────────────────────
-#
-# Benchmark result (C, -Ofast -march=native -ffp-contract=fast):
-#   Regime    Halley  HH4-mild  HH4-all
-#   ATM       2.487   2.487     2.051   (-0.44 iters)
-#   mild-OTM  2.716   2.272     2.272   (-0.45 iters)
-#   deep-OTM  2.537   2.537     2.047   (-0.49 iters)
-#   TOTAL     2.609   2.428     2.139   → +7.6% vs Halley, +5.6% vs HH4-mild
-#
-# HH4 saves ~0.44 iters in ALL regimes, not just mild-OTM.
-# The extra arithmetic per step (5 ops vs 3 for Halley) is paid back
-# by fewer iterations across the board.
 
 @njit(fastmath=True, parallel=False, cache=True)
 def batch_logit_hh4all_serial(ks, cs, out):
