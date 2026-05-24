@@ -29,10 +29,6 @@ Timings report the best of 5 runs. The standard grid contains 328 base points re
 | HP Spectre Intel i7 Evo, Windows | MSYS2 UCRT64 GCC 16.1 | 328-p | Regime-split HH-4 | 118.4 | 7.344e-14 | **1.672x** |
 | HP Spectre Intel i7 Evo, Windows | MSYS2 UCRT64 GCC 16.1 | 1970-p | Jäckel reference implementation | 208.4 | 7.327e-15 | — |
 | HP Spectre Intel i7 Evo, Windows | MSYS2 UCRT64 GCC 16.1 | 1970-p | Regime-split HH-4 | 126.9 | 6.026e-13 | **1.642x** |
-| Linux container | GCC 13.3 | 328-p | Jäckel reference implementation | 343.7 | 1.221e-15 | — |
-| Linux container | GCC 13.3 | 328-p | Regime-split HH-4 | 168.9 | 7.377e-14 | **2.035x** |
-| Intel Xeon Gold 8160 server | Clang | 328-p | Jäckel reference implementation | 468.8 | 1.776e-15 | — |
-| Intel Xeon Gold 8160 server | Clang | 328-p | Regime-split HH-4 | 299.6 | 7.316e-14 | **1.565x** |
 
 ### Standalone C benchmark
 
