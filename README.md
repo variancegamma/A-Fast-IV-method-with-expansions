@@ -29,9 +29,9 @@ Timings report the best of 5 runs. The standard grid contains 328 base points re
 | Compiler | Grid | Method | ns/IV | Max error | Speedup |
 |---|---:|---|---:|---:|---:|
 | MSYS2 UCRT64 GCC 16.1 | 328-p | Jäckel reference implementation | 197.9 | 1.679e-15 | — |
-| MSYS2 UCRT64 GCC 16.1 | 328-p | Regime-split HH-4 | 118.4 | 7.344e-14 | **1.672x** |
+| MSYS2 UCRT64 GCC 16.1 | 328-p | Regime-split HH-4 | 112.7-114.2 | 8.52e-14 | **1.733-1.756x** |
 | MSYS2 UCRT64 GCC 16.1 | 1970-p | Jäckel reference implementation | 208.4 | 7.327e-15 | — |
-| MSYS2 UCRT64 GCC 16.1 | 1970-p | Regime-split HH-4 | 126.9 | 6.026e-13 | **1.642x** |
+| MSYS2 UCRT64 GCC 16.1 | 1970-p | Regime-split HH-4 | 124.9 | 6.026e-13 | **1.668x** |
 
 ### Standalone C benchmark
 
