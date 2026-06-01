@@ -132,8 +132,8 @@ def compile_regime(regime_c):
 
         raise FileNotFoundError(f"Missing regime source: {regime_c}")
 
-    out = HERE / ("iv_regime_hh4_all" + lib_ext())
-    flags =["-Ofast", "-march=native", "-mtune=native","-ffp-contract=fast","-fno-math-errno", "-fno-trapping-math", "-fomit-frame-pointer"] 
+    out = HERE / ("iv_regime_final_v2" + lib_ext())
+    flags =["-Ofast", "-march=native", "-mtune=native","-ffp-contract=fast","-fno-math-errno", "-fno-trapping-math", "-fomit-frame-pointer","-funsafe-math-optimizations", "-fno-signed-zeros", "-fno-rounding-math"] 
     #["-O3", "-ffast-math", "-march=native"]
     if platform.system() != "Windows":
         flags += ["-fPIC"]
@@ -205,8 +205,8 @@ def normpdf(x): return math.exp(-0.5*x*x)/math.sqrt(2.0*math.pi)
 
 
 def build_grid(repeats=5000):
-    vols = np.r_[0.01, np.arange(0.05, 2.0001, 0.05)]
-    deltas = np.array([0.05,0.20, 0.30, 0.45, 0.55, 0.70, 0.80, 0.95])
+    vols = np.r_[0.01, np.arange(0.05, 2.0001, 0.01)]
+    deltas = np.array([0.01,0.05,0.20, 0.30, 0.45, 0.55, 0.70, 0.80, 0.95,0.99])
     ks, vs, cs = [], [], []
 
     for v in vols:
@@ -251,7 +251,7 @@ def bench(label, fn, ks, cs, true_v, runs=10):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lbr-dir", default="C:/Users/aheki/Downloads/_lbr_build", help="Existing lets_be_rational source tree")
-    ap.add_argument("--regime-c", default=str(HERE / "iv_regime_hh4_all.c"), help="Path to your iv_regime.c")
+    ap.add_argument("--regime-c", default=str(HERE / "iv_regime_final_v2.c"), help="Path to your iv_regime.c")
     ap.add_argument("--repeats", type=int, default=5000)
     ap.add_argument("--runs", type=int, default=10)
     args = ap.parse_args()
