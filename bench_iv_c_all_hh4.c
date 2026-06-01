@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "iv_regime_hh4_all.c"
+#include "iv_regime_final_v2.c"
+//"iv_regime_final.c"
+//"iv_regime_three_band_tail_cs_0p01.c"
+//"iv_regime_three_band.c"
 
 
 
