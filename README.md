@@ -1,6 +1,6 @@
 # A-Fast-IV-method-with-analytical-expansions
 
-This repo provides the underlying code for a fast implied-volatility method based on analytical expansions.
+This repo provides the underlying code for "a fast implied-volatility method based on analytical expansions" study available under https://doi.org/10.13140/RG.2.2.35595.66089
 
 The following compiler command is used across all benchmarks in the paper:
 
