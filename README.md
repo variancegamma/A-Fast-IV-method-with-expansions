@@ -15,7 +15,7 @@ After GCC compilation, the executable bench_iv_c_all_hh4.exe is ready to be run 
 
 ## Benchmark Results
 
-Timings report the best of 5 runs. The standard grid contains 328 base points repeated 5,000 times, giving 1,640,000 implied-volatility inversions.
+Timings report the best of 5 runs. The standard grid contains 328 base points repeated 5,000 times, giving 1,640,000 implied-volatility inversions and the other 1,970 point granular grid is again repeated 5,000 times giving 9,850,000 implied-volatility inversions.
 
 ### Grid definitions
 
