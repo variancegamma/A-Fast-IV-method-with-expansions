@@ -39,7 +39,7 @@ This benchmark removes the Python/ctypes shared-library wrapper used in the Jäc
 
 | Implementation | Grid | Best ns/IV | Median ns/IV | Maximum error |
 |---|---:|---:|---:|---:|
-| Regime-split HH-4, standalone C | 1,640,000 | 117.2 | 118.8 | 7.333e-14 |
+| Regime-split HH-4, standalone C | 1,640,000 | 112.7 | 115.6 | 7.333e-14 |
 
 The Jackel benchmark can be replicated using simple python script run.
 ```bash
